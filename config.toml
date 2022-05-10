@@ -1,0 +1,48 @@
+[params]
+# baseURL = "http://example.org/"
+# languageCode = "en-us"
+title = "Mountagha's blog"
+author = "Mountagha"
+profilePicture = "images/profile.jpg"
+
+[module]
+  # uncomment line below for temporary local development of module
+  # replacements = "github.com/lxndrblz/anatole -> ../../anatole"
+  [[module.imports]]
+    path = "github.com/lxndrblz/anatole"
+    disable = false
+
+[[params.socialIcons]]
+icon = "fab fa-linkedin"
+title = "Linkedin"
+url = "https://www.linkedin.com/in/mamadou-mountagha-bah-b40701141/"
+
+[[params.socialIcons]]
+icon = "fab fa-github"
+title = "github"
+url = "https://github.com/Mountagha"
+
+[[params.socialIcons]]
+icon = "favicons/gmail.ico"
+title = "e-mail"
+url = "mailto:muntaghaba@gmail.com"
+
+[menu]
+
+  [[menu.main]]
+  name = "Home"
+  identifier = "home"
+  weight = 100
+  url = "/"
+
+  [[menu.main]]
+  name = "Posts"
+  weight = 200
+  identifier = "posts"
+  url = "/post/"
+
+  [[menu.main]]
+  name = "About"
+  weight = 300
+  identifier = "about"
+  url = "/about/"
