@@ -1,32 +1,39 @@
-name: github pages
+name: GitHub Pages Deploy
 
 on:
   push:
     branches:
-      - main  # Set a branch to deploy
-  pull_request:
+      - main  # Triggers the workflow when pushing to the 'main' branch
 
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
+  build-deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      # Setup Ruby environment
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          ruby-version: '3.0' # Specify the Ruby version you need for Jekyll
+          bundler-cache: true
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          # extended: true
+      # Install Jekyll and dependencies
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
 
-      - name: Build
-        run: hugo --minify
+      # Build the Jekyll site
+      - name: Build the site
+        run: |
+          bundle exec jekyll build
 
-      - name: Deploy
+      # Deploy the site to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
