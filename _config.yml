@@ -24,7 +24,7 @@
 title: Mountagha's Blog
 email: muntaghaba@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Stay TUUNED MY FRIENDS.
+  A place where I will share my passions with you.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
@@ -37,6 +37,11 @@ plugins:
   - jekyll-feed
   - jekyll-remote-theme
 
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "About"
+    url: "/about/"
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
