@@ -26,17 +26,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=1762830de1909010da2a53ab3c458a6587938c54">
-    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+    <link rel="stylesheet" href="/assets/css/style.css?v=f5e40ec6307db7a99e8af6a26dc717e8a22e7f5f">
+    <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/">About</a></li>
+  </ul>
+</nav>
 
-<!-- Setup Google Analytics -->
+<style>
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+}
 
+nav ul li {
+  display: inline;
+}
 
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
 
-<!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+nav ul li a:hover {
+  background-color: #45a049;
+}
+</style>
 
-<!-- end custom head snippets -->
 
   </head>
   <body>
@@ -44,7 +67,7 @@
 
     <header class="page-header" role="banner">
       <h1 class="project-name">Welcome to Jekyll!</h1>
-      <h2 class="project-tagline">Stay TUUNED MY FRIENDS.</h2>
+      <h2 class="project-tagline">A place where I will share my passions with you.</h2>
       
         <a href="https://github.com/Mountagha/Mountagha.github.io" class="btn">View on GitHub</a>
       
