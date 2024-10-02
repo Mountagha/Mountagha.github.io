@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>My Journey to Compilers | Mountagha’s Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="My Journey to Compilers" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A place where I will share my passions with you." />
+<meta property="og:description" content="A place where I will share my passions with you." />
+<link rel="canonical" href="/cool-page.html" />
+<meta property="og:url" content="/cool-page.html" />
+<meta property="og:site_name" content="Mountagha’s Blog" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="My Journey to Compilers" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A place where I will share my passions with you.","headline":"My Journey to Compilers","url":"/cool-page.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=f5ce0caf09827dc066c208974559dbd601124371">
+    <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about/">About</a></li>
+  </ul>
+</nav>
+
+<style>
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #45a049;
+}
+</style>
+
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">My Journey to Compilers</h1>
+      <h2 class="project-tagline">A place where I will share my passions with you.</h2>
+      
+        <a href="https://github.com/Mountagha/Mountagha.github.io" class="btn">View on GitHub</a>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <h2 id="my-journey-to-compilers">My Journey to Compilers</h2>
+
+<p>Ever since I started programming a bit seriously in high school, compiler technology has always been a fascination for me. The process of taking a textual form of some unreadable gibberish and turning it into something actually executing and outputting something meaningful was nothing but total amaze to me. 
+During those past years I have tried multiple times to build one that would go beyond what is teached at School. In high School all my compiler classes consisted on studies purely based on theory about states machines and how to turn some non deterministic automatas to some deterministic automatas. Nothing of all of that made me understand really what a compiler was. I just knew that that magic piece of software that could turn a textual form from an editor to something that is understandable by the computer hardware. So after graduating and started working a full time job I figured I could finally write one and finally somehow quench my curiosity. 
+It was then that after multiple researches that I finally stumbled upon the COOL compiler. An academic compiler whose purpose was just to teach the compiler technology in a relatively manageable time i.e not too long. The whole source code wouldn’t surpass roughly 5 thousand lines of code. The course was very organized breaking into multiple capsules of video each introducing smoothly a concept by the very best teach alex…. 
+I started motivated went through all the theory necessary to implement the lexer then when I started actually writing it I disappointingly found that the lexer was handled by the YACC suits which did not give me full credit on the work. I convinced myself that the lexer would be simple enough to understand it and if eventually I wanted to build it from scratch I could be able to at least that what I told to myself to convince me not to stop. I continued and finish the lexer and got into the parser part. After finishing grabbing all the theory through the video capsules I went on to actually code it only to find out again that another popular and renown tool Bison is used for the parser. My frustration grew bigger and I knew that going that way even if I finished the compiler wouldn’t completely satfisty my curiosity. Then as any quitter I quit. I let the project slept away and got back into my day to job. 
+it wasn’t until a year later or so When I stumble upon the niel’s book (the online version) that everything finally clicked. If there’s one technical book that I enjoyed reading the most it would be the crafting interpreters of niels Am.. I so much enjoyed his writing that I bought the hard copy even though the online version would be sufficient. The book is thick around 700 pages well written and easy to read with a bit of humour here and there. Although the book tought on how to write an interpreter the concepts need are almost always the same as the one needed to write an actual compiler. The book is in 2 main parts the first one implement an AST traversal interpreter for a small well crafted language and the second part (my favourite) implement actually a virtual machine interpreter style which is actually like a real compiler only its simulate the CPU on which bytecode is executed. 
+Needless to say that I read the book thoroughly back and forth and implemented both versions of interpreters. See my github here and here for the AST like and the bytecode like respectively. What I find really interesting with the material was that his vertical approach on the writing insteald of the traditional horizontal approach i.e you don’t have to implement the whole lexer by example before moving on the parser 
+His approach was more like we build a lexer for a small subset of the language syntax, then parse that part and interpret it see the result and then pass to another language feature and then iteratate over and over again until all the features/constructs of the language are supported.
+After implementing my first interpreter I felt a bit more confident but was still left with some frustration. The language or mini language for which the interpreter is written for is relatively simple. It is dynamically typed which simplified the task somehow since you don’t need to handle type checking which for a typed language is a major part of the compiler. 
+I then decided that I needed to come back to my old friend the COOL compiler I let down a year or 2 ago. But this time I decided that I would write my own lexer and parser from scratch armed with the skills I learned from the niel book. 
+The lexing and parsing parts went relatively well. It got a bit more coarsed when I got to the semantics analysis part. There were a lot of logic checking involved each of needing 2 or 3 programming concepts / data structures to overcome which are challenges on their own. Type inference, inheritance checking, type conformity… But that I found is the beauty of compilers. They require almost all sort of data structures techniques learned on a typical computer science curriculum. But the real hardest part at least the one that took me longer time to get right was the code generation part. It required a tremendous amount of effort to debug and make it compile and correctly all the cool compiler source files at hand. But that was something expected, it was a new territory to me far from my nice a smoother tutorial on how to make interpreter from the nystrom book. Here I was fighting with octets in memory and offset on stack (Yes I was debugging the generating assembly by hand a lot of times computing memory addresses at hand) but then the reward I get when all source files at hand got compiled and executed is far beyond what I expected. Plus I learned a ton of stuffs on how a program get executed at the lowest level (Well not the lowest cause I was not reading bits flowing through circuits l.o.l) 
+If you’re more interested in my side projects especially more on the technical aspects of it please have a look at this page where I talked about the technical aspects of COOL and also here on a more modern compiler construction techniques using the same approach that LLVM used or even better at my github repo where you can have a look at the code and give me feedback maybe.
+Thanks for reading.</p>
+
+<p><a href="./">back</a></p>
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/Mountagha/Mountagha.github.io">Mountagha.github.io</a> is maintained by <a href="https://github.com/Mountagha">Mountagha</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
