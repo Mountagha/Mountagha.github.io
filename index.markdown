@@ -4,3 +4,5 @@
 
 layout: home
 ---
+Ceci est un test
+[//]: # "Comment" 
