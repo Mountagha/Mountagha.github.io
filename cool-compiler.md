@@ -268,4 +268,6 @@ There are some improvements I’d like to add to COOL (probably in the near futu
 If you’re interested in reading the code, the [GitHub repository](https://github.com/Mountagha/coolc-from-scratch) is all you need. Feel free to use, copy, or leave comments.
 
 Thanks for reading!
+
+
 [back](./)
