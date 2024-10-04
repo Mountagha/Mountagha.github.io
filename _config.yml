@@ -24,7 +24,7 @@
 title: Mountagha's Blog
 email: muntaghaba@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  A place where I will share my passions with you.
+  A corner of the web where I will share my passions with you.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
@@ -61,3 +61,8 @@ nav:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+github:
+  repository_url: https://github.com/Mountagha
+linkedin:
+  url: https://www.linkedin.com/in/mamadou-mountagha-bah-b40701141/

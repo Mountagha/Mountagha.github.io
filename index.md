@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Mountagha's Blog
 ---
 
 ## My Journey to Compilers
