@@ -5,7 +5,7 @@ permalink: /about/
 ---
 ---
 
-**Hi, I’m Mamado Mountagha BAH, a passionate software engineer.**
+**Hi, I’m Mamadou Mountagha BAH, a passionate software engineer.**
 
 I hold an MSc in Computer Science from Sherbrooke University, a charming city nestled in southern Quebec. Prior to that, I earned my degree in Computer Engineering at the National Applied School of Science in Kenitra, Morocco. My love for programming runs deep—especially when it’s close to the bare metal—but my true passion lies in the fascinating intersection of **machine learning** and **compiler technology**.
 
