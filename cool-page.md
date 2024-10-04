@@ -4,7 +4,7 @@ layout: default
 
 ## My Journey to Compilers
 
-Ever since I started programming seriously in high school, compiler technology has always fascinated me. The process of taking a textual form of some unreadable gibberish and turning it into something that actually executes and produces meaningful output was nothing short of amazing to me.
+Ever since I started programming seriously at university, compiler technology has always fascinated me. The process of taking a textual form of some unreadable gibberish and turning it into something that actually executes and produces meaningful output was nothing short of amazing to me.
 
 Over the past years, I’ve tried multiple times to build a compiler that would go beyond what is taught at school. In high school, all my compiler classes were purely theoretical, focusing on state machines and how to turn non-deterministic automata into deterministic ones. None of that really made me understand what a compiler was. I just knew that it was this magic piece of software that could transform text from an editor into something understandable by the computer hardware.
 
