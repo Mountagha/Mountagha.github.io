@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=6d0fd2cc1625b9d199485d9f0db92273864e57d6">
+    <link rel="stylesheet" href="/assets/css/style.css?v=f383f731839e410180b54e722f7b395ae20fd0ba">
     <nav>
   <ul>
     <li><a href="/">Home</a></li>
@@ -82,7 +82,27 @@ KECC is C compiler developped at <a href="KAIST">link</a> lab using the Rust pro
   <li>I recently learned Rust and wanted to used it in a real life project for more understanding.</li>
   <li>Unlike <a href="COOL">link</a> which is developped in a monolithic way, KECC adopts the very recents compiler development technics which made it very modular and closed to what is used in real compilers structures like [link] LLVM.</li>
   <li>This is my occasion to implement real life optimizations used in real life compilers</li>
+  <li>the KECC compiler is provided with a fair amount skeleton code which is most like 
+contributing to a open Source project. For somebody aspiring to have a fair
+amount of contribution to big open source projects like <a href="Pytorch">link</a> and <a href="LLVM">link</a>,
+this is a perfect way to my maiden voyage into open source contribution.</li>
 </ul>
+
+<h3 id="kecc-organization">KECC organization:</h3>
+<p>Unlike the <a href="COOL Compiler">link</a> emphasizes more on the backend part or would I say emphasizes less on the front part 
+of the compiler (lexer parser) which are handled by an external crate lang_c which parses the C
+language into an AST. The main part of the project consists of translating the 
+provided AST into an [link] SSA-based [link] intermediate representation (IR) 
+then applied some optimizations upon the generated IR (Gloval Value Numbering, constant propagation) 
+and finish by emitting a [RISC-V] assembly program.</p>
+
+<h3 id="parser">parser</h3>
+<h3 id="ir-generation">IR generation</h3>
+<h3 id="cfg-simplification">CFG simplification</h3>
+<h3 id="deadcode-elimination">Deadcode Elimination</h3>
+<h3 id="memory-to-register-mem2reg">Memory to Register (mem2reg)</h3>
+
+<h2 id="conclusion">Conclusion</h2>
 
 <p><a href="./">back</a></p>
 
