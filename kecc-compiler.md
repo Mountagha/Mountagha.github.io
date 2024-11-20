@@ -22,6 +22,70 @@ then applied some optimizations upon the generated IR (Gloval Value Numbering, c
 and finish by emitting a [RISC-V](https://fr.wikipedia.org/wiki/RISC-V) assembly program.
 
 ### parser
+KAIST parser is entirely handled by [Rust Lang_c crate](https://crates.io/crates/lang-c) which parses the source code into an AST whose root is the Translation unit. The root got external declarations as children which also got their children (You know the music).
+
+```Rust 
+
+// From 6.9 External definitions
+
+/// Entire C source file after preprocessing
+///
+/// (C11 6.9)
+#[derive(Debug, PartialEq, Clone)]
+pub struct TranslationUnit(pub Vec<Node<ExternalDeclaration>>);
+
+/// Top-level elements of a C program
+///
+/// (C11 6.9)
+#[derive(Debug, PartialEq, Clone)]
+pub enum ExternalDeclaration {
+    Declaration(Node<Declaration>),
+    StaticAssert(Node<StaticAssert>),
+    FunctionDefinition(Node<FunctionDefinition>),
+}
+
+/// Function definition
+///
+/// (C11 6.9.1)
+#[derive(Debug, PartialEq, Clone)]
+pub struct FunctionDefinition {
+    /// Return type of the function, possibly mixed with other specifiers
+    pub specifiers: Vec<Node<DeclarationSpecifier>>,
+    /// Contains function name and parameter list
+    pub declarator: Node<Declarator>,
+    /// K&R style parameter type definitions (C11 6.9.1 §6)
+    pub declarations: Vec<Node<Declaration>>,
+    /// Body of the function.
+    pub statement: Node<Statement>,
+}
+
+```
+In that part of the project, an AST printer needed to be implemented, and I found the testing approach to be particularly clever. The AST printer's purpose was to generate the original C source code from the AST. To test it, the generated code was parsed again, and the resulting AST was compared with the original to ensure they were identical.
+
+```Rust 
+
+impl WriteLine for TranslationUnit {
+    fn write_line(&self, indent: usize, write: &mut dyn Write) -> Result<()> {
+        for ext_decl in &self.0 {
+            ext_decl.write_line(indent, write)?;
+            writeln!(write)?;
+        }
+        Ok(())
+    }
+}
+
+impl WriteLine for ExternalDeclaration {
+    fn write_line(&self, indent: usize, write: &mut dyn Write) -> Result<()> {
+        match self {
+            Self::Declaration(decl) => decl.write_line(indent, write),
+            Self::StaticAssert(_) => panic!(),
+            Self::FunctionDefinition(fdef) => fdef.write_line(indent, write),
+        }
+    }
+}
+
+```
+
 ### IR generation
 ### CFG simplification
 #### constant propagation
