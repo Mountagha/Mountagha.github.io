@@ -87,7 +87,93 @@ impl WriteLine for ExternalDeclaration {
 ```
 
 ### IR generation
-The intermediate representation generation part is pretty challenging as it is the first time I was experiencing it. What makes 
+The intermediate representation (IR) generation process has been particularly challenging, as it was my first time working on such a task. What made it even more difficult was the absence of a formal specification for the IR. Instead, I had to rely on a collection of C source files paired with their corresponding IR outputs. It felt somewhat like a reverse engineering exercise to deduce and produce the correct IR.
+
+Like most modern IRs, KECC IR is based on SSA (Static Single Assignment) form. In this representation, each register is assigned a value only once, which simplifies the analysis and facilitates optimizations, as we will explore later.
+
+Below is an example of a Fibonacci program written in C alongside its corresponding generated IR.
+
+```C
+
+int nonce = 1; // For random input
+
+int fibonacci(int n) {
+    if (n < 2) {
+        return n;
+    }
+
+    return fibonacci(n - 2) + fibonacci(n - 1);
+}
+
+int main() {
+    int number = nonce % 20;
+    return fibonacci(number);
+}
+
+```
+the generated IR.
+
+```
+var i32 @nonce = 1
+
+fun i32 @fibonacci (i32) {
+init:
+  bid: b0
+  allocations: 
+    %l0:i32:n
+
+block b0:
+  %b0:p0:i32:n
+  %b0:i0:unit = store %b0:p0:i32 %l0:i32*
+  %b0:i1:i32 = load %l0:i32*
+  %b0:i2:u1 = cmp lt %b0:i1:i32 2:i32
+  br %b0:i2:u1, b1(), b2()
+
+block b1:
+  %b1:i0:i32 = load %l0:i32*
+  ret %b1:i0:i32
+
+block b2:
+  j b3()
+
+block b3:
+  %b3:i0:i32 = load %l0:i32*
+  %b3:i1:i32 = sub %b3:i0:i32 2:i32
+  %b3:i2:i32 = call @fibonacci:[ret:i32 params:(i32)]*(%b3:i1:i32)
+  %b3:i3:i32 = load %l0:i32*
+  %b3:i4:i32 = sub %b3:i3:i32 1:i32
+  %b3:i5:i32 = call @fibonacci:[ret:i32 params:(i32)]*(%b3:i4:i32)
+  %b3:i6:i32 = add %b3:i2:i32 %b3:i5:i32
+  ret %b3:i6:i32
+
+block b4:
+  j b3()
+
+block b5:
+  ret undef:i32
+}
+
+fun i32 @main () {
+init:
+  bid: b0
+  allocations: 
+    %l0:i32:number
+
+block b0:
+  %b0:i0:i32 = load @nonce:i32*
+  %b0:i1:i32 = mod %b0:i0:i32 20:i32
+  %b0:i2:unit = store %b0:i1:i32 %l0:i32*
+  %b0:i3:i32 = load %l0:i32*
+  %b0:i4:i32 = call @fibonacci:[ret:i32 params:(i32)]*(%b0:i3:i32)
+  ret %b0:i4:i32
+
+block b1:
+  ret 0:i32
+}
+
+```
+
+
 ### CFG simplification
 #### constant propagation
 ### Deadcode Elimination
