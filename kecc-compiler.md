@@ -60,7 +60,7 @@ pub struct FunctionDefinition {
 }
 
 ```
-In that part of the project, an AST printer needed to be implemented, and I found the testing approach to be particularly clever. The AST printer's purpose was to generate the original C source code from the AST. To test it, the generated code was parsed again, and the resulting AST was compared with the original to ensure they were identical.
+In that part of the project, an AST printer was asked to be implemented, going through the AST and then regerenating the C code. The way the parser is tested is pretty clever. The AST printer goes through the AST parser and then generate back the original C source code. To test it, the generated code was parsed again, and the resulting AST was compared with the original to ensure they were identical.
 
 ```Rust 
 
@@ -87,6 +87,7 @@ impl WriteLine for ExternalDeclaration {
 ```
 
 ### IR generation
+The intermediate representation generation part is pretty challenging as it is the first time I was experiencing it. What makes 
 ### CFG simplification
 #### constant propagation
 ### Deadcode Elimination
