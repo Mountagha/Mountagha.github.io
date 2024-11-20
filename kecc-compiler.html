@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=d4c055f6d9bdf57e8a43c4ed7a7fe7bfaa5fde06">
+    <link rel="stylesheet" href="/assets/css/style.css?v=6013ddb439967790a6aceb9eed1b946a4b1eba83">
     <nav>
   <ul>
     <li><a href="/">Home</a></li>
@@ -97,6 +97,68 @@ then applied some optimizations upon the generated IR (Gloval Value Numbering, c
 and finish by emitting a <a href="https://fr.wikipedia.org/wiki/RISC-V">RISC-V</a> assembly program.</p>
 
 <h3 id="parser">parser</h3>
+<p>KAIST parser is entirely handled by <a href="https://crates.io/crates/lang-c">Rust Lang_c crate</a> which parses the source code into an AST whose root is the Translation unit. The root got external declarations as children which also got their children (You know the music).</p>
+
+<pre><code class="language-Rust">
+// From 6.9 External definitions
+
+/// Entire C source file after preprocessing
+///
+/// (C11 6.9)
+#[derive(Debug, PartialEq, Clone)]
+pub struct TranslationUnit(pub Vec&lt;Node&lt;ExternalDeclaration&gt;&gt;);
+
+/// Top-level elements of a C program
+///
+/// (C11 6.9)
+#[derive(Debug, PartialEq, Clone)]
+pub enum ExternalDeclaration {
+    Declaration(Node&lt;Declaration&gt;),
+    StaticAssert(Node&lt;StaticAssert&gt;),
+    FunctionDefinition(Node&lt;FunctionDefinition&gt;),
+}
+
+/// Function definition
+///
+/// (C11 6.9.1)
+#[derive(Debug, PartialEq, Clone)]
+pub struct FunctionDefinition {
+    /// Return type of the function, possibly mixed with other specifiers
+    pub specifiers: Vec&lt;Node&lt;DeclarationSpecifier&gt;&gt;,
+    /// Contains function name and parameter list
+    pub declarator: Node&lt;Declarator&gt;,
+    /// K&amp;R style parameter type definitions (C11 6.9.1 §6)
+    pub declarations: Vec&lt;Node&lt;Declaration&gt;&gt;,
+    /// Body of the function.
+    pub statement: Node&lt;Statement&gt;,
+}
+
+</code></pre>
+<p>In that part of the project, an AST printer needed to be implemented, and I found the testing approach to be particularly clever. The AST printer’s purpose was to generate the original C source code from the AST. To test it, the generated code was parsed again, and the resulting AST was compared with the original to ensure they were identical.</p>
+
+<pre><code class="language-Rust">
+impl WriteLine for TranslationUnit {
+    fn write_line(&amp;self, indent: usize, write: &amp;mut dyn Write) -&gt; Result&lt;()&gt; {
+        for ext_decl in &amp;self.0 {
+            ext_decl.write_line(indent, write)?;
+            writeln!(write)?;
+        }
+        Ok(())
+    }
+}
+
+impl WriteLine for ExternalDeclaration {
+    fn write_line(&amp;self, indent: usize, write: &amp;mut dyn Write) -&gt; Result&lt;()&gt; {
+        match self {
+            Self::Declaration(decl) =&gt; decl.write_line(indent, write),
+            Self::StaticAssert(_) =&gt; panic!(),
+            Self::FunctionDefinition(fdef) =&gt; fdef.write_line(indent, write),
+        }
+    }
+}
+
+</code></pre>
+
 <h3 id="ir-generation">IR generation</h3>
 <h3 id="cfg-simplification">CFG simplification</h3>
 <h4 id="constant-propagation">constant propagation</h4>
