@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css?v=6013ddb439967790a6aceb9eed1b946a4b1eba83">
+    <link rel="stylesheet" href="/assets/css/style.css?v=7149327eb2917a452d6085b5cda0c3870ff482f5">
     <nav>
   <ul>
     <li><a href="/">Home</a></li>
@@ -134,7 +134,7 @@ pub struct FunctionDefinition {
 }
 
 </code></pre>
-<p>In that part of the project, an AST printer needed to be implemented, and I found the testing approach to be particularly clever. The AST printer’s purpose was to generate the original C source code from the AST. To test it, the generated code was parsed again, and the resulting AST was compared with the original to ensure they were identical.</p>
+<p>In that part of the project, an AST printer was asked to be implemented, going through the AST and then regerenating the C code. The way the parser is tested is pretty clever. The AST printer goes through the AST parser and then generate back the original C source code. To test it, the generated code was parsed again, and the resulting AST was compared with the original to ensure they were identical.</p>
 
 <pre><code class="language-Rust">
 impl WriteLine for TranslationUnit {
@@ -160,6 +160,7 @@ impl WriteLine for ExternalDeclaration {
 </code></pre>
 
 <h3 id="ir-generation">IR generation</h3>
+<p>The intermediate representation generation part is pretty challenging as it is the first time I was experiencing it. What makes</p>
 <h3 id="cfg-simplification">CFG simplification</h3>
 <h4 id="constant-propagation">constant propagation</h4>
 <h3 id="deadcode-elimination">Deadcode Elimination</h3>
